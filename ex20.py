@@ -1,6 +1,7 @@
 #! usr/bin/env python
 
 #exercise 20: Functions and Files
+#introduces shorthand +=
 
 from sys import argv
 
@@ -30,8 +31,11 @@ print "Let's print three lines:"
 current_line = 1
 print_a_line(current_line, current_file)
 
-current_line = current_line + 1
+#current_line = current_line + 1
+#extra-credit: rewrite the above code using shorthand +=
+current_line += 1
 print_a_line(current_line, current_file)
 
-current_line = current_line + 1
+#current_line = current_line + 1
+current_line += 1
 print_a_line(current_line, current_file)
