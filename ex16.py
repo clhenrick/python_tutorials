@@ -1,5 +1,4 @@
 #! usr/bin/env python
-#notes: unsure of how to solve extra-credit 3 on this exercise.
 
 #get input from the user
 from sys import argv
