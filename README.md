@@ -1,4 +1,4 @@
 python_tutorials
 ================
 
-learn python the hardway tutorials
+[Learn Python The Hardway](http://learnpythonthehardway.org/) tutorials 
