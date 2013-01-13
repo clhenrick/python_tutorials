@@ -1,18 +1,20 @@
 #! usr/bin/env python
 
-# exercise 35: branches and functions
-# extra credit: expand upon, simplify, and improve game
+""" exercise 35: branches and functions
+extra credit 4 & 5: expand upon, simplify, and improve game
+"""
 
 from sys import exit
 
 def gold_room():
-    """simplified gold room stage.
-    if a number is not entered then user is prompted to enter one. """
+    """simplified gold room stage / fixed checking next for a number.
+    if a number is not entered then user is prompted to enter one.
+    """
     print "This room is full of gold. How much do you take?"
     try:
         next = int(raw_input("> "))
     except:
-        print "Give me a number."
+        print "Give me a whole number."
         gold_room()
         
     if next < 50:
@@ -25,7 +27,8 @@ def gold_room():
 def bear_room():
     """ left door option from start()
     Asks the user how to interact with the bear.
-    Based on input the user either goes on to the gold room or loses the game. """
+    Based on input the user either goes on to the gold room or loses the game.
+    """
     
     #simplified print
     print "There is a bear here.\nThe bear has a bunch of honey.\nThe fat bear is in front of another door.\nHow are you going to move the bear?"
@@ -33,7 +36,7 @@ def bear_room():
     #added for extra credit:
     print "Your options are: \n \t take honey \n \t taunt bear"
     
-    bear_moved = False
+    bear_moved = False #still unsure of how this works / what it does...
     
     while True:
         next = raw_input("> ")
@@ -43,6 +46,8 @@ def bear_room():
         elif next == "taunt bear" and not bear_moved:
             print "The bear has moved from the door. You can go through it now."
             bear_moved = True
+            
+            #extra credit, added options:
             print "Your options are: \n \t kick bear \n \t shoot bear \n \t open door"
             
             choice2 = raw_input(">> ")
@@ -65,7 +70,8 @@ def bear_room():
 
 def cthulhu_room():
     """right door option from start()
-    user either goes back to start or loses game. """
+    user either goes back to start or loses game.
+    """
     print "Here you see the great evil Cthulhu."
     print "He, it, whatever stares at you and you go insane."
     print "Do you flee for your life or eat your head?"
@@ -81,13 +87,15 @@ def cthulhu_room():
 
 def dead(why):
     """the user has lost the game
-    tells user why and then 'Good job!' """
+    tells user why and then 'Good job!'
+    """
     print why, "Good job!"
     exit(0)
 
 def start():
     """start of game, gives user an option for a left or right door
-    if neither is chosen user loses and game ends. """
+    if neither is chosen user loses and game ends.
+    """
     print "You are in a dark room."
     print "There is a door to your right and left."
     print "Which one do you take?"
