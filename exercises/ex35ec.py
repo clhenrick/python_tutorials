@@ -1,32 +1,38 @@
 #! usr/bin/env python
 
 # exercise 35: branches and functions
+# extra credit: expand upon, simplify, and improve game
 
 from sys import exit
 
 def gold_room():
+    """simplified gold room stage.
+    if a number is not entered then user is prompted to enter one. """
     print "This room is full of gold. How much do you take?"
-    
-    next = raw_input("> ")
-    if "0" in next or "1" in next:
-        how_much = int(next)
-    else:
-        dead("Man, learn to type a number.")
-    
-    if how_much < 50:
+    try:
+        next = int(raw_input("> "))
+    except:
+        print "Give me a number."
+        gold_room()
+        
+    if next < 50:
         print "Nice, you're not greedy, you win!"
         exit(0)
     else:
         dead("You greedy bastard!")
 
+
 def bear_room():
     """ left door option from start()
     Asks the user how to interact with the bear.
     Based on input the user either goes on to the gold room or loses the game. """
-    print "There is a bear here."
-    print "The bear has a bunch of honey."
-    print "The fat bear is in front of another door."
-    print "How are you going to move the bear?"
+    
+    #simplified print
+    print "There is a bear here.\nThe bear has a bunch of honey.\nThe fat bear is in front of another door.\nHow are you going to move the bear?"
+    
+    #added for extra credit:
+    print "Your options are: \n \t take honey \n \t taunt bear"
+    
     bear_moved = False
     
     while True:
@@ -37,6 +43,19 @@ def bear_room():
         elif next == "taunt bear" and not bear_moved:
             print "The bear has moved from the door. You can go through it now."
             bear_moved = True
+            print "Your options are: \n \t kick bear \n \t shoot bear \n \t open door"
+            
+            choice2 = raw_input(">> ")
+            
+            if choice2 == "kick bear":
+                dead("Bear gets mad and eats you.")
+            elif choice2 == "shoot bear":
+                dead("You missed. The bear chews you up.")
+            elif choice2 == "open door":
+                gold_room()                
+            else:
+                print "I don't understand."
+        
         elif next == "taunt bear" and bear_moved:
             dead("The bear gets pissed off and chews your leg off.")
         elif next == "open door" and bear_moved:
