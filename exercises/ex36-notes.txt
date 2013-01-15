@@ -1,0 +1,12 @@
+Learn Python the Hardway
+exercise 36 notes:
+
+invent a game similar to last exercise following the guidelines Zed specifies
+for If-Statements and Loops, and tips for debugging.
+
+game ideas:
+    -bike messenger choose your own adventure
+    -another monster / door game
+    -zombie game
+
+draw map of game on paper or in illustrator
