@@ -41,7 +41,3 @@ while True:
             
     else:
         print "I didn't get that! Enter your choice again."
-            
-            
-        
-    
