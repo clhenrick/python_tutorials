@@ -12,6 +12,7 @@ to do:
 """
 
 from sys import exit
+import re
 
 """
 set variables for start of game to default values
@@ -30,10 +31,17 @@ def start_game(health_count, jobs_count, cash_count):
     #Tells user objective of the game
     print "\nYou are a bicycle messenger cycling towards downtown Philly.\nYou must make as many deliveries as possible without dying!"
     print "Your current stats are:\n\t health: +%r\n\t jobs: %r\n\t cash: $%r" % (health_count, jobs_count, cash_count)
+    dispatcher(health_count, jobs_count, cash_count)
+    
+def dispatcher(health_count, jobs_count, cash_count)
     
     #Ask user which job they'd like to take
     print "\nYour dispatcher calls out three jobs, which one do you call on?"
     print "\n\t 1. job heading south to the Navy Yard \n\t 2. job heading east to Olde City \n\t 3. job staying local to 1735 Market St."
+    
+    health_new = health_count
+    jobs_new = jobs_count
+    cash_new = cash_count
     
     choice_made = False
     
@@ -42,13 +50,13 @@ def start_game(health_count, jobs_count, cash_count):
         next = 	raw_input("> ")
     
         if "1" in next and not choice_made:
-            job_south(health, jobs +1, cash)
+            job_south(health_new, jobs_new +1, cash_new)
             
         elif "2" in next and not choice_made:
-            job_east(health, jobs +1, cash)
+            job_east(health_new, jobs_new +1, cash_new)
             
         elif "3" in next and not choice_made:
-            job_local(health, jobs +1, cash)
+            job_local(health_new, jobs_new +1, cash_new)
             
         else:
             # tell user to call on a job and go back to top of loop
@@ -61,7 +69,9 @@ takes one argument <why> which states reason why game ended
 """
  
 def end_game(why):
-    """ends the game and tells the user why."""
+    """
+    ends the game and tells the user why.
+    	"""
     print why, "It sure is rough out there!"
     exit(0)
 
@@ -111,7 +121,9 @@ def job_east(health_count, jobs_count, cash_count):
     print "You made your pick up and have %r job(s) in your bag." % jobs_count
     print "Do you head east or wait for another job heading that way?"
     
+    health_new = health_count
     jobs_new = jobs_count
+    cash_new = cash_count
     
     choice_made = False
     
@@ -120,7 +132,7 @@ def job_east(health_count, jobs_count, cash_count):
         next = raw_input(">")
     
         if "east" in next or "head" in next and not choice_made:
-            print "You're heading east with %r job(s)." % jobs
+            head_east_no_rush(health_new, jobs_new, cash_new)
         
         elif "wait" in next and not choice_made:
             print "You wait 15 minutes. Your dispatcher informs you she has another job heading east, a rush! Way to be patient."
@@ -194,6 +206,10 @@ def head_east(health_count, jobs_count, cash_count):
     
     else:
         end_game("You're late with the rush! You're fired!")
+
+def head_east_no_rush(health_count, jobs_count, cash_count):
+    print "You're heading east with %r job." % jobs_count
+    exit(0) #tempoary exit function, remove after finishing this branch of the game.
 
 """
 third set of job choices:
