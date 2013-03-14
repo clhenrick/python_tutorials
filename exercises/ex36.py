@@ -14,25 +14,83 @@ to do:
 from sys import exit
 import re
 
-"""
-set variables for start of game to default values
-"""
 
+#set variables for start of game to default values
+###################################################
 cash = 5
 health = 100
 jobs = 0
 
-"""
-start the game with the start_game() function.
-function takes variable values for health, jobs, and cash.
-"""
+def start_game(health, jobs, cash):
+    """
+    start the game with the start_game() function.
+    function takes variable values for health, jobs, and cash.
+    """
+    print("\n**************** PHILLY BIKE MESSENGER v0.1 ****************\n"
+      "\nYou are a bicycle messenger cycling towards downtown Philly."
+      "\nYou must make as many deliveries as possible without dying!"
+      "\nYour current stats are:"
+      "\n\t health: +%r"
+      "\n\t jobs: %r"
+      "\n\t cash: $%r" % (health, jobs, cash))
 
-def start_game(health_count, jobs_count, cash_count):
-    #Tells user objective of the game
-    print "\nYou are a bicycle messenger cycling towards downtown Philly.\nYou must make as many deliveries as possible without dying!"
-    print "Your current stats are:\n\t health: +%r\n\t jobs: %r\n\t cash: $%r" % (health_count, jobs_count, cash_count)
-    dispatcher(health_count, jobs_count, cash_count)
+    dispatcher(health, jobs, cash)
+
+def dispatcher(health_count, jobs_count, cash_count):    
+    health_new = health_count
+    jobs_new = jobs_count
+    cash_new = cash_count
     
+    print("\nYour dispatcher calls out three jobs, which one do you call on?"
+      "\n\t 1. a job heading south to the Navy Yard"
+      "\n\t 2. a job heading east to Olde City"
+      "\n\t 3. a job staying local to 1735 Market St.")
+    
+    first_pattern = "1$|south|Navy|Yard"
+    second_pattern = "^2|east|Olde|City"
+    third_pattern = "^3|local|1735|Market|St|St."
+    
+    choice = raw_input("> ")
+    
+    if re.search(first_pattern, choice, re.I):
+        print("You said %r, so you're calling on the south job?"
+              "\nY/N?" % choice)
+              
+        yes_no = raw_input("> ")
+        
+        if "Y" in yes_no or "y" in yes_no:
+           job_south(health_new, jobs_new +1, cash_new)
+        else:
+           dispatcher(health_new, jobs_new, cash_new)
+        
+    elif re.search(second_pattern, choice, re.I):
+        print("You said %r, so you're calling on the east job?" 
+              "\nY/N?" % choice)
+              
+        yes_no = raw_input("> ")
+        
+        if "Y" in yes_no or "y" in yes_no:
+           job_east(health_new, jobs_new +1, cash_new)
+        else:
+           dispatcher(health_new, jobs_new, cash_new)
+           
+    elif re.search(third_pattern, choice, re.I):
+        print("You said %r, so you're calling on the local job?"
+              "\nY/N?" % choice)
+              
+        yes_no = raw_input("> ")
+        
+        if "Y" in yes_no or "y" in yes_no:
+           job_local(health_new, jobs_new +1, cash_new)
+        else:
+           dispatcher(health_new, jobs_new, cash_new)
+    else:
+        print("I didn't get that, tell me again.")
+        dispatcher(health_new, jobs_new, cash_new)    
+
+
+#old version of dispatcher() to keep temporarily
+"""
 def dispatcher(health_count, jobs_count, cash_count)
     
     #Ask user which job they'd like to take
@@ -62,23 +120,19 @@ def dispatcher(health_count, jobs_count, cash_count)
             # tell user to call on a job and go back to top of loop
             print "your dispatcher said; 'call on a job knuckle head!'"
             #start_game(health, jobs, cash)
-
-"""
-function to end the game here.
-takes one argument <why> which states reason why game ended
 """
  
 def end_game(why):
     """
     ends the game and tells the user why.
-    	"""
-    print why, "It sure is rough out there!"
+    """
+    print("\n %s" 
+          "\nIt sure is rough out there!" % why)
     exit(0)
 
 
-"""
-first three choices from start_game() are here:
-"""
+#first three choices from start_game() are here:
+################################################
 
 def job_local(health_count, jobs_count, cash_count):    
     print "You're staying local. \nYou have %r job(s) in your bag." % jobs_count
@@ -95,7 +149,7 @@ def job_local(health_count, jobs_count, cash_count):
 
         if "make" in next:
             health_new = health_new -100
-            end_game("You were just run over by a bus!")
+            end_game('You were just run over by a bus!')
             
         if "wait" in next:
             print "How many minutes do you wait?"
@@ -118,8 +172,8 @@ def job_local(health_count, jobs_count, cash_count):
                end_game("Man you're lazy and are fired!")
                     
 def job_east(health_count, jobs_count, cash_count): 
-    print "You made your pick up and have %r job(s) in your bag." % jobs_count
-    print "Do you head east or wait for another job heading that way?"
+    print ("You made your pick up and have %r job(s) in your bag."
+           "\nDo you head east or wait for another job heading that way?" % jobs_count)
     
     health_new = health_count
     jobs_new = jobs_count
@@ -141,20 +195,20 @@ def job_east(health_count, jobs_count, cash_count):
             choice = raw_input(">")
         
             if choice == "yes":
-                head_east(health, jobs +1, cash)
+                head_east(health, jobs_new +1, cash)
             else:
                 end_game("Your boss said you're too lazy and fired you.")
         else:
             print "Not sure what you're saying."
  
 def job_south(health_count, jobs_count, cash_count):
-    print "You have %r jobs. Do you wait for another job going south or do you roll out?" % jobs_count
+    print("You have %r jobs. Do you wait for another job going south or do you roll out?" % jobs_count)
     
     next = raw_input("?")
 
-"""
-second set of job choices here:
-"""    
+
+#second set of job choices here:
+######################################################    
 
 def super_local(health_count, jobs_count, cash_count):
     print "\nOkay you have 15 minutes to complete the super rush.\nDo you deliver it or your other job?"
@@ -222,5 +276,5 @@ def finished_east(health_count, jobs_count, cash_count):
 """
 start the game here!
 """
-
-start_game(health, jobs, cash)
+if __name__ == "__main__":
+    start_game(health, jobs, cash)

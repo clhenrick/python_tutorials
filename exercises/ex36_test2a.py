@@ -5,7 +5,6 @@ testing new stuff and debugging for ex36.py from LPTHW
 To do: incorporate regular expressions;
     try IGNORECASE <done>
         and searching "1" vs. "1735" <use the \d escape code?>
-
 """
 
 import re
@@ -14,14 +13,14 @@ import re
 # also added a print statement to debug and also to double check user entered desired choice.
 def dispatcher():
     
+	print("\nYour dispatcher calls out three jobs, which one do you call on?"
+	  "\n\t 1. a job heading south to the Navy Yard"
+	  "\n\t 2. a job heading east to Olde City"
+	  "\n\t 3. a job staying local to 1735 Market St.")
+    
     first_pattern = "1$|south|Navy|Yard"
     second_pattern = "^2|east|Olde|City"
     third_pattern = "^3|local|1735|Market|St|St."
-    
-    print("\nYour dispatcher calls out three jobs, which one do you call on?"
-          "\n\t 1. a job heading south to the Navy Yard"
-          "\n\t 2. a job heading east to Olde City"
-          "\n\t 3. a job staying local to 1735 Market St.")
     
     choice = raw_input("> ")
     
