@@ -16,15 +16,14 @@ import re
 
 
 #set variables for start of game to default values
-###################################################
-cash = 5
-health = 100
-jobs = 0
+cash = 5.00 #amount of money as $
+health = 100 #health as %
+jobs = 0 #number of deliveries in messenger's bag as an integer.
 
 def start_game(health, jobs, cash):
     """
     start the game with the start_game() function.
-    function takes variable values for health, jobs, and cash.
+    function takes variable values for health, jobs, and 	cash.
     """
     print("\n**************** PHILLY BIKE MESSENGER v0.1 ****************\n"
       "\nYou are a bicycle messenger cycling towards downtown Philly."
@@ -87,56 +86,35 @@ def dispatcher(health_count, jobs_count, cash_count):
     else:
         print("I didn't get that, tell me again.")
         dispatcher(health_new, jobs_new, cash_new)    
-
-
-#old version of dispatcher() to keep temporarily
-"""
-def dispatcher(health_count, jobs_count, cash_count)
-    
-    #Ask user which job they'd like to take
-    print "\nYour dispatcher calls out three jobs, which one do you call on?"
-    print "\n\t 1. job heading south to the Navy Yard \n\t 2. job heading east to Olde City \n\t 3. job staying local to 1735 Market St."
-    
-    health_new = health_count
-    jobs_new = jobs_count
-    cash_new = cash_count
-    
-    choice_made = False
-    
-    while True:
-    
-        next = 	raw_input("> ")
-    
-        if "1" in next and not choice_made:
-            job_south(health_new, jobs_new +1, cash_new)
-            
-        elif "2" in next and not choice_made:
-            job_east(health_new, jobs_new +1, cash_new)
-            
-        elif "3" in next and not choice_made:
-            job_local(health_new, jobs_new +1, cash_new)
-            
-        else:
-            # tell user to call on a job and go back to top of loop
-            print "your dispatcher said; 'call on a job knuckle head!'"
-            #start_game(health, jobs, cash)
-"""
  
 def end_game(why):
     """
     ends the game and tells the user why.
     """
-    print("\n %s" 
-          "\nIt sure is rough out there!" % why)
+    health_final = health
+    jobs_final = jobs #change this so that a variable is made to store the number of jobs a user completed
+    cash_final = cash
+    
+    print("%s" 
+          "\nIt sure is rough out there!"
+          "\n\n\tFINAL STATS:"
+          "\n\t*health: %r"
+          "\n\t*jobs: %r"
+          "\n\t*cash: $%r" % (why, health_final, jobs_final, cash_final))
     exit(0)
 
 
 #first three choices from start_game() are here:
 ################################################
 
-def job_local(health_count, jobs_count, cash_count):    
-    print "You're staying local. \nYou have %r job(s) in your bag." % jobs_count
-    print "Do you make your delivery or wait?"
+def job_local(health_count, jobs_count, cash_count):  
+    """
+    third choice from dispatcher()
+    all choices take health, jobs, and cash 
+    """  
+    print("You're staying local."
+        "\nYou have %r job(s) in your bag." 
+        "\nDo you make your delivery or wait?" % jobs_count)
     
     health_new = health_count
     jobs_new = jobs_count
@@ -145,19 +123,20 @@ def job_local(health_count, jobs_count, cash_count):
     choice_made = False
     
     while True:
-        next = raw_input("?")
+        next = raw_input("> ")
 
-        if "make" in next:
+        if "make" in next and not choice_made:
             health_new = health_new -100
             end_game('You were just run over by a bus!')
             
-        if "wait" in next:
-            print "How many minutes do you wait?"
-            time = int(raw_input("?"))
+        elif "wait" in next and not choice_made:
+            print ("How many minutes do you wait?")
+            time = int(raw_input("> "))
             
             if time < 30:
-                print "\nYour dispatcher just offered you a super rush going to the same address!\nThis job pays $30 should you complete it."
-                print "\nDo you take it?"
+                print("\nYour dispatcher just offered you a super rush going to the same address!"
+                      "\nThis job pays $30 should you complete it."
+                      "\nDo you take it?")
                 
                 input = raw_input("y/n ")
                 
@@ -169,11 +148,14 @@ def job_local(health_count, jobs_count, cash_count):
                     end_game("That was a dumb choice!")
             
             else:
-               end_game("Man you're lazy and are fired!")
+               end_game("Man you're lazy and just got fired!")
                     
+        else:
+            print("Didn't get that, learn to use your radio!")
+
 def job_east(health_count, jobs_count, cash_count): 
-    print ("You made your pick up and have %r job(s) in your bag."
-           "\nDo you head east or wait for another job heading that way?" % jobs_count)
+    print("You made your pick up and have %r job(s) in your bag."
+          "\nDo you head east or wait for another job heading that way?" % jobs_count)
     
     health_new = health_count
     jobs_new = jobs_count
@@ -189,8 +171,8 @@ def job_east(health_count, jobs_count, cash_count):
             head_east_no_rush(health_new, jobs_new, cash_new)
         
         elif "wait" in next and not choice_made:
-            print "You wait 15 minutes. Your dispatcher informs you she has another job heading east, a rush! Way to be patient."
-            print "Do you call on the rush?"
+            print("You wait 15 minutes. Your dispatcher informs you she has another job heading east, a rush! Way to be patient."
+                  "\nDo you call on the rush?")
         
             choice = raw_input(">")
         
@@ -202,7 +184,8 @@ def job_east(health_count, jobs_count, cash_count):
             print "Not sure what you're saying."
  
 def job_south(health_count, jobs_count, cash_count):
-    print("You have %r jobs. Do you wait for another job going south or do you roll out?" % jobs_count)
+    print("You have %r jobs."
+          "\nDo you wait for another job going south or do you roll out?" % jobs_count)
     
     next = raw_input("?")
 
@@ -211,13 +194,28 @@ def job_south(health_count, jobs_count, cash_count):
 ######################################################    
 
 def super_local(health_count, jobs_count, cash_count):
-    print "\nOkay you have 15 minutes to complete the super rush.\nDo you deliver it or your other job?"
+    print("\nOkay you have 15 minutes to complete the super rush."
+          "\nDo you deliver it or your other job?")
+    health_new = health_count
+    jobs_new = jobs_count
+    cash_new = cash_count
+    next = raw_input("> ")
+    
+    if "deliver" in next:
+        print("\nWay to go!"
+              "\nYou just made $30!")
+        cash_new = cash_new + 30
+        jobs_new = jobs_new - 1
+    
+    else:
+        print("Okay you delivered your other job, but now you're late with the super rush!")
+        end_game('Learning are we?')
 
 def head_east(health_count, jobs_count, cash_count):
     print "You are heading east with %r job(s)" % jobs_count
     print "Which job do you deliver first? The rush or the regular one?"
     
-    next = raw_input(">")
+    next = raw_input("> ")
     
     if "rush" in next:
         print "Awesome, you just made $15!"
@@ -265,16 +263,18 @@ def head_east_no_rush(health_count, jobs_count, cash_count):
     print "You're heading east with %r job." % jobs_count
     exit(0) #tempoary exit function, remove after finishing this branch of the game.
 
-"""
-third set of job choices:
-"""
+
+#third set of job choices:
+######################################################    
 
 def finished_east(health_count, jobs_count, cash_count):
     print "Now, do you hang east for a minute or go back to downtown?"
-    next = raw_input("?")
+    next = raw_input("> ")
+    
 
-"""
-start the game here!
-"""
+######################################################    
 if __name__ == "__main__":
+    """
+    start the game here!
+    """
     start_game(health, jobs, cash)

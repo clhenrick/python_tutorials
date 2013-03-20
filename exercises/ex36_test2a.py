@@ -118,8 +118,7 @@ def dispatcher():
 
 """
 
-if __name__ == "__main__":
-    dispatcher()
+  
 
 
  
