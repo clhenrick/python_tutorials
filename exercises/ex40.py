@@ -29,7 +29,7 @@ while True:
      # '_find' instance of cities and calls a function with parameters state and cities.
      print city_found
 
-# extra-credit:     
+# extra-credit:N     
 # re-write while loop using cities.get(raw_input("> "), state)?
 # print cities.items() # prints each item pair 
 # print cities.keys() # prints only the keys
