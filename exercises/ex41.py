@@ -1,10 +1,15 @@
 #! /usr/bin/env python
 
+"""
+Exercise 41 from LPTHW
+building on dict
+"""
+
 from sys import exit
 from random import randint
 
 # ends the game.
-def death():
+def death(action):
     """
     DEAD.
     """
@@ -17,7 +22,7 @@ def death():
     exit(1)
 
 # start of game.
-def central_corridor():
+def central_corridor(action):
     """
     The Gothons of Planet Percal #25 have invaded your ship and destroyed
     your entire crew. You are the last surviving member and your last
@@ -30,7 +35,7 @@ def central_corridor():
     flowing around his hate filled body. He's blocking the door to the
     Armory and about to pull a weapon to blast you!
     """       
-    action = raw_input("> ")
+    #action = raw_input("> ")
            
     if action=="shoot!":
         print(
@@ -68,7 +73,7 @@ def central_corridor():
         print("DOES NOT COMPUTE!")
         return 'central_corridor'
 
-def laser_weapon_armory():
+def laser_weapon_armory(action):
     """
     You do a dive roll into the Weapon Armory, crouch and scan the room
     for more Gothons that might be hiding. It's dead quiet, too quiet.
@@ -78,9 +83,10 @@ def laser_weapon_armory():
     wrong 10 times then the lock closes forever and you can't
     get the bomb.  The code is 3 digits.
     """
-    code = "%d%d%d" % (randint(1,9), randint(1,9), randint(1,9))
-    # code = "123" # for debugging
-    guess = raw_input("[keypad]> ")
+    #code = "%d%d%d" % (randint(1,9), randint(1,9), randint(1,9))
+    code = "123" # for debugging
+    #guess = raw_input("[keypad]> ")
+    guess = action # rename the functions parameter to match existing variable ``guess``
     guesses = 0
     
     while guess != code and guesses < 10:
@@ -92,7 +98,8 @@ def laser_weapon_armory():
         print(
             "\n\tThe container clicks open and the seal breaks, leting gas out."
             "\n\tYou grab the neutron bomb and run as fast as you can to the"
-            "\n\tbridge where you must place it in the right spot.")
+            "\n\tbridge where you must place it in the right spot."
+            )
         return 'the_bridge'
     
     else:
@@ -100,10 +107,11 @@ def laser_weapon_armory():
             "\n\tThe lock buzzes one last time and then you hear a sickening"
             "\n\tmelting sound as the mechanism is fused together."
             "\n\tYou decide to sit there, and finally the Gothons blow up the"
-            "\n\tship from their ship and you die.")
+            "\n\tship from their ship and you die."
+            )
         return 'death'
 
-def the_bridge():
+def the_bridge(action):
     """
     You burst onto the Bridge with the netron destruct bomb
     under your arm and surprise 5 Gothons who are trying to
@@ -113,7 +121,7 @@ def the_bridge():
     arm and don't want to set it off.
     """
           
-    action = raw_input("> ")
+    #action = raw_input("> ")
           
     if action == "throw the bomb":
         print(
@@ -142,7 +150,7 @@ def the_bridge():
         print("DOES NOT COMPUTE!")
         return 'the_bridge'
 
-def escape_pod():
+def escape_pod(action):
     """
     You rush through the ship desperately trying to make it to
     the escape pod before the whole ship explodes.  It seems like
@@ -154,7 +162,8 @@ def escape_pod():
     """
     
     good_pod = randint(1,5)
-    guess = raw_input("[pod #]> ")
+   # guess = raw_input("[pod #]> ")
+    guess = action
     
     if int(guess) != good_pod:
         print(
@@ -181,6 +190,19 @@ ROOMS = {
     'escape_pod': escape_pod
     }
 
+# extra credit:
+    """
+    Zed says;
+       "Once you have doc comments as the room description, do you need to
+        have the function prompt even? Have the runner prompt the user, and
+        pass that in to each function. Your functions should just be
+        if-statements printing the result and returning the next room."
+        
+    Adding the prompt as a parameter to room() works, but we don't need
+    a prompt for death(). So how do we not pass to this one function in the
+    ROOMS dict?
+    """
+
 def runner(map, start):
     next = start
     
@@ -188,7 +210,7 @@ def runner(map, start):
         room = map[next]
         print "\n----------"
         print room.__doc__ # prints the description (doc string) of each function
-        next = room()
+        next = room(action = raw_input("> "))
 
 
 if __name__ == "__main__":
