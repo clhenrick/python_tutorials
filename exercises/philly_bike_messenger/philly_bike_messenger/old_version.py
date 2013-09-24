@@ -1,7 +1,5 @@
 #! usr/bin/env python
 # Learn Python the Hardway
-# Exercise 43: make your own game using classes
-
 """
 exercise 36 from Learn Python the Hard Way
 Build your own game!

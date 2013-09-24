@@ -1,5 +1,5 @@
 from nose.tools import *
-import NAME
+import philly_bike_messenger
 
 def setup():
     print "SETUP!"

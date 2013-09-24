@@ -1,0 +1,35 @@
+Philly Bicycle Messenger Game
+interactive text game
+
+setup:
+-initialize game with variables for health, jobs, cash, etc.
+   (Look back to ex33.py as an example)
+    
+map:
+-map out game using classes for rooms with inheritence
+
+
+architecture:
+-have separate files; one for rooms, one for starting game, one for each stage, one for engine, etc.
+   -see ex43.py for examples of this
+-create a tree and separate files into trees instead of stages?
+
+  class hierarchy:
+    * Map
+      - next_scene
+      - opening_scene
+    * Engine
+    * stage
+    * Scene
+       - enter
+       * EndGame; you die and lose the game. Final stats are returned.
+       * Start; gives the player three options
+       * Job; pieces of the game that make up stages or branches of the tree
+          * south
+          * east
+          * local
+          
+          * gone_south
+          * super_local
+          * local_regular
+          * local_rush  

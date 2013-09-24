@@ -191,17 +191,17 @@ ROOMS = {
     }
 
 # extra credit:
-    """
+"""
     Zed says;
        "Once you have doc comments as the room description, do you need to
         have the function prompt even? Have the runner prompt the user, and
-        pass that in to each function. Your functions should just be
+        pass that into each function. Your functions should just be
         if-statements printing the result and returning the next room."
         
     Adding the prompt as a parameter to room() works, but we don't need
     a prompt for death(). So how do we not pass to this one function in the
     ROOMS dict?
-    """
+"""
 
 def runner(map, start):
     next = start

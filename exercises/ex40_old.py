@@ -17,7 +17,8 @@ def find_city(themap, state):
     else:
         return "Not found."
 
-cities['_find'] = find_city # is this passing the function find_city() as the second item of the pair in the cities dictionary?
+# is this passing the function find_city() as the second item of the pair in the cities dictionary? YES!
+cities['_find'] = find_city 
 
 while True:
      print "State? (ENTER to quit)",
