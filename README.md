@@ -1,4 +1,3 @@
 python_tutorials
 ================
-
-[Learn Python The Hardway](http://learnpythonthehardway.org/) tutorials 
+Documenting my progress in the [Learn Python The Hardway](http://learnpythonthehardway.org/) book. 
